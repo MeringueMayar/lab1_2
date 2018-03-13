@@ -20,7 +20,7 @@ public class Tax {
 
     private String description;
 
-    public Tax(Money amount, String description) {
+    Tax(Money amount, String description) {
         super();
         this.amount = amount;
         this.description = description;
