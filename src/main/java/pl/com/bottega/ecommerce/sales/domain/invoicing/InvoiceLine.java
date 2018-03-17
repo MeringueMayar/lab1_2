@@ -28,9 +28,9 @@ public class InvoiceLine {
 
     private Money gros;
 
-    private Tax tax;
+    private TaxPolicy tax;
 
-    InvoiceLine(ProductData product, int quantity, Money net, Tax tax) {
+    InvoiceLine(ProductData product, int quantity, Money net, TaxPolicy tax) {
         this.product = product;
         this.quantity = quantity;
         this.net = net;
@@ -54,7 +54,7 @@ public class InvoiceLine {
         return gros;
     }
 
-    public Tax getTax() {
+    public TaxPolicy getTax() {
         return tax;
     }
 }
