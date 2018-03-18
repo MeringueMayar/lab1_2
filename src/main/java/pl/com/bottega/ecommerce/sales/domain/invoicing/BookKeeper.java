@@ -21,30 +21,15 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class BookKeeper {
 
-    public Invoice issuance(InvoiceRequest invoiceRequest, InvoiceFactory invoiceFactory) {
+    public Invoice issuance(InvoiceRequest invoiceRequest, InvoiceFactory invoiceFactory, TaxStrategy taxStrategy) {
         Invoice invoice = invoiceFactory.createGenericInvoice(invoiceRequest.getClient());
 
         for (RequestItem item : invoiceRequest.getItems()) {
             Money net = item.getTotalCost();
             BigDecimal ratio = null;
             String desc = null;
-            Tax tax = null;
-
-            switch (item.getProductData().getType()) {
-                case DRUG:
-                    tax = new DrugTax().calculate(net);
-                    break;
-                case FOOD:
-                    tax = new FoodTax().calculate(net);
-                    break;
-                case STANDARD:
-                    tax = new StandardTax().calculate(net);
-                    break;
-
-                default:
-                    throw new IllegalArgumentException(item.getProductData().getType() + " not handled");
-            }
-
+            Tax tax = taxStrategy.decideOnTaxType(item).calculate(net);
+            
             InvoiceLine invoiceLine = new InvoiceLine(item.getProductData(), item.getQuantity(), net, tax);
             invoice.addItem(invoiceLine);
         }
