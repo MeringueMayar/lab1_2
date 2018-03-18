@@ -28,28 +28,22 @@ public class BookKeeper {
             Money net = item.getTotalCost();
             BigDecimal ratio = null;
             String desc = null;
+            Tax tax = null;
 
             switch (item.getProductData().getType()) {
                 case DRUG:
-                    ratio = BigDecimal.valueOf(0.05);
-                    desc = "5% (D)";
+                    tax = new DrugTax().calculate(net);
                     break;
                 case FOOD:
-                    ratio = BigDecimal.valueOf(0.07);
-                    desc = "7% (F)";
+                    tax = new FoodTax().calculate(net);
                     break;
                 case STANDARD:
-                    ratio = BigDecimal.valueOf(0.23);
-                    desc = "23%";
+                    tax = new StandardTax().calculate(net);
                     break;
 
                 default:
                     throw new IllegalArgumentException(item.getProductData().getType() + " not handled");
             }
-
-            Money taxValue = net.multiplyBy(ratio);
-
-            Tax tax = new Tax(taxValue, desc);
 
             InvoiceLine invoiceLine = new InvoiceLine(item.getProductData(), item.getQuantity(), net, tax);
             invoice.addItem(invoiceLine);
