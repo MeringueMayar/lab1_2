@@ -5,10 +5,6 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public interface TaxPolicy {
     
-    public void calculateTax(ProductType productType, Money net) throws IllegalArgumentException;
-    
-    public Money getAmount();
-    
-    public String getDescription();
+    public Tax createTax(ProductType productType, Money net) throws IllegalArgumentException;
     
 }
