@@ -21,12 +21,12 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class BookKeeper {
 
-    public Invoice issuance(ClientData client, List<RequestItem> items, InvoiceFactory invoiceFactory, TaxFactory taxFactory) {       
+    public Invoice issuance(ClientData client, List<RequestItem> items, InvoiceFactory invoiceFactory, TaxPolicy taxPolicy) {       
         Invoice invoice = invoiceFactory.createInvoice(Id.generate(),client);
 
         for (RequestItem item : items) {
             Money net = item.getTotalCost();       
-            Tax tax = taxFactory.createTax(item.getProductData().getType(), net);
+            Tax tax = taxPolicy.calculateTax(item.getProductData(), net);
             InvoiceLine invoiceLine = new InvoiceLine(item.getProductData(), item.getQuantity(), net, tax);
             invoice.addItem(invoiceLine);
         }
