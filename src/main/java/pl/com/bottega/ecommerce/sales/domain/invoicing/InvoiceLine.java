@@ -35,7 +35,6 @@ public class InvoiceLine {
         this.quantity = quantity;
         this.net = net;
         this.tax = tax;
-
         this.gros = net.add(tax.getAmount());
     }
 

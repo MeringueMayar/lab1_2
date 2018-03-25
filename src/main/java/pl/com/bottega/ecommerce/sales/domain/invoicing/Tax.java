@@ -17,21 +17,27 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 public class Tax {
 
     private Money amount;
-
     private String description;
-
+    
     public Tax(Money amount, String description) {
-        super();
         this.amount = amount;
         this.description = description;
     }
-
+    
     public Money getAmount() {
         return amount;
     }
-
+    
     public String getDescription() {
         return description;
+    }
+    
+    public void setAmount(Money amount) {
+        this.amount = amount;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }
