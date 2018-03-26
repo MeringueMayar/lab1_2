@@ -13,10 +13,7 @@
 package pl.com.bottega.ecommerce.sales.domain.invoicing;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
-import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.Id;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class BookKeeper {
@@ -26,10 +23,8 @@ public class BookKeeper {
 
         for (RequestItem item : invoiceRequest.getItems()) {
             Money net = item.getTotalCost();
-            BigDecimal ratio = null;
-            String desc = null;
-            Tax tax = taxStrategy.decideOnTaxType(item).calculate(net);
-            
+            Tax tax = taxStrategy.calculateTax(item.getTotalCost(), item.getProductData().getType());
+
             InvoiceLine invoiceLine = new InvoiceLine(item.getProductData(), item.getQuantity(), net, tax);
             invoice.addItem(invoiceLine);
         }
