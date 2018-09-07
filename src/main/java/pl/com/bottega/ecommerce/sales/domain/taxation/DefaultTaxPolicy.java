@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.com.bottega.ecommerce.sales.domain.invoicing;
+package pl.com.bottega.ecommerce.sales.domain.taxation;
 
 import java.math.BigDecimal;
+import pl.com.bottega.ecommerce.sales.domain.invoicing.RequestItem;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 /**
