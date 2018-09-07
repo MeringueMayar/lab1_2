@@ -20,7 +20,7 @@ import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.Id;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
-public class Invoice {
+public class Invoice implements InvoiceInterface {
 
     private ClientData client;
 
@@ -49,7 +49,7 @@ public class Invoice {
     }
 
     /**
-     * 
+     *
      * @return immutable projection
      */
     public List<InvoiceLine> getItems() {
