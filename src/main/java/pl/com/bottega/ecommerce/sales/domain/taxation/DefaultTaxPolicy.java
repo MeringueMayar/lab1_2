@@ -13,8 +13,9 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
  *
  * @author karko
  */
-public class DefaultTaxPolicy {
+public class DefaultTaxPolicy implements TaxPolicyInterface {
 
+    @Override
     public Tax calculateTax(RequestItem requestItem) {
 
         Money net = requestItem.getTotalCost();
